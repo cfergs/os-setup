@@ -1,0 +1,33 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge]
+"NewTabPageContentEnabled"=dword:00000000
+"NewTabPageAllowedBackgroundTypes"=dword:00000003
+"NewTabPageQuickLinksEnabled"=dword:00000000
+; #can collect, organize, share, and export content more efficiently and with Office integration.
+"EdgeCollectionsEnabled"=dword:00000000
+;  # receive customized background images and text, suggestions, notifications, and tips for Microsoft services.
+"SpotlightExperiencesAndRecommendationsEnabled"=dword:00000000
+;  # Users can use the Follow an influencer, site, or topic in Microsoft Edge.
+"EdgeFollowEnabled"=dword:00000000
+"EdgeShoppingAssistantEnabled"=dword:00000000
+"AddressBarMicrosoftSearchInBingProviderEnabled"=dword:00000000
+"AlternateErrorPagesEnabled"=dword:00000000
+;  # Sidebar is a launcher bar on the right side of Microsoft Edge's screen.
+"HubsSidebarEnabled"=dword:00000000
+;  # Allow personalization of ads, Microsoft Edge, search, news and other Microsoft services by sending browsing history, favorites and collections, usage and other browsing data to Microsoft
+"PersonalizationReportingEnabled"=dword:00000000
+; # Enables the Edge bar
+"WebWidgetAllowed"=dword:00000000
+; # Allow feature recommendations and browser assistance notifications from Microsoft Edge
+"ShowRecommendationsEnabled"=dword:00000000
+[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge\ExtensionAllowedTypes]
+"1"="theme"
+
+;# possible ONLY if not Win10 home and domain joined/intune managed or fake mdm settings
+;# https://hitco.at/blog/apply-edge-policies-for-non-domain-joined-devices/
+;#[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge]
+;#"DefaultSearchProviderEnabled"=dword:00000001
+;#"DefaultSearchProviderSearchURL"="url: {google:baseURL}search?q=%s&{google:RLZ}{google:originalQueryForSuggestion}{google:assistedQueryStats}{google:searchFieldtrialParameter}{google:iOSSearchLanguage}{google:searchClient}{google:sourceId}{google:contextualSearchVersion}ie={inputEncoding}"
+;#"DefaultSearchProviderName"="Google"
+;#"DefaultSearchProviderSuggestURL"="{google:baseURL}complete/search?output=chrome&q={searchTerms}"
