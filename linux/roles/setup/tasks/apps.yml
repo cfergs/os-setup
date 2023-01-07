@@ -18,7 +18,6 @@
   ansible.builtin.dnf:
     name:
       - code
-      - python3-pip
       - keepassxc
     state: present
 
@@ -49,9 +48,3 @@
   community.general.flatpak:
     name: com.github.iwalton3.jellyfin-media-player
     state: present
-
-# for configuring firefox settings
-- name: Install Requests
-  ansible.builtin.pip:
-    name:
-      - requests==2.28.1

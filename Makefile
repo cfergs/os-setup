@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := clean-dev-environment
 
 pre-install-steps:
-	sudo dnf install python3-pip -y
+	./os-prereq.sh
 
 # pre-commit
 PRE_COMMIT_HOOK_STAMP := .git/hooks/pre-commit
@@ -21,7 +21,7 @@ VENV_DIRECTORY := .venv
 DEV_REQUIREMENTS_STAMP := $(VENV_DIRECTORY)/dev-requirements-stamp
 FROZEN_DEV_REQUIREMENTS_STAMP := $(VENV_DIRECTORY)/frozen-dev-requirements-stamp
 
-${VENV_DIRECTORY}:
+${VENV_DIRECTORY}: pre-install-steps
 	python3 -m venv ${VENV_DIRECTORY}
 	. .venv/bin/activate; pip install -r requirements-pip.txt
 
