@@ -1,0 +1,14 @@
+---
+- name: Setup Workstation
+  hosts: localhost
+  gather_facts: true
+  become: true
+  vars_files:
+    - ./vars/default.yml
+  roles:
+    - role: setup
+      vars:
+        - ansible_become: true
+    - role: staticdev.firefox
+      vars:
+        - ansible_become: false

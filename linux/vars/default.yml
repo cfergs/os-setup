@@ -1,0 +1,9 @@
+---
+firefox_profiles:
+  default-release: # default fedora profile
+    extensions:
+      - ublock-origin
+      - multi-account-containers
+      - sponsorblock
+    preferences:
+      browser.backspace_action: 0

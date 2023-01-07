@@ -1,0 +1,9 @@
+{
+    "ansible.python.interpreterPath": ".venv/bin/python3",
+    "ansible.ansible.path": ".venv/bin/ansible",
+    "extensions.ignoreRecommendations": true,
+    "files.associations": {
+        "*.yml": "ansible"
+    },
+    "redhat.telemetry.enabled": false
+}
