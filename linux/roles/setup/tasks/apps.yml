@@ -12,39 +12,49 @@
     file: vscode
     gpgcheck: true
     gpgkey: https://packages.microsoft.com/keys/microsoft.asc
-  notify: Update DNF cache
+  notify: Update DNF Cache
+
+- name: Import Google RPM key
+  ansible.builtin.rpm_key:
+    key: https://dl.google.com/linux/linux_signing_key.pub
+
+- name: Add Google Repo
+  ansible.builtin.yum_repository:
+    name: google-chrome
+    baseurl: http://dl.google.com/linux/chrome/rpm/stable/x86_64
+    description: Google Chrome # actually name in file
+    enabled: true
+    file: google-chrome
+    gpgcheck: true
+    gpgkey: https://dl.google.com/linux/linux_signing_key.pub
+  notify: Update DNF Cache
 
 - name: Install dnf apps
   ansible.builtin.dnf:
     name:
       - code
-      - keepassxc
+      - google-chrome-stable
     state: present
 
-- name: Install Google Chrome
-  ansible.builtin.dnf:
-    name: google-chrome
-    enablerepo: config-manager
-    state: present
-
-- name: Download installers
-  ansible.builtin.get_url:
-    url: "{{ item }}"
-    dest: /tmp
-    mode: 0664
-  with_items:
-    - https://release.gitkraken.com/linux/gitkraken-amd64.rpm
-    - https://kojipkgs.fedoraproject.org//packages/onedrive/2.4.21/1.fc37/x86_64/onedrive-2.4.21-1.fc37.x86_64.rpm
-
-- name: Install rpm files
+- name: Install rpmfusion repos
   ansible.builtin.dnf:
     name:
-      - /tmp/gitkraken-amd64.rpm
-      - /tmp/onedrive-2.4.21-1.fc37.x86_64.rpm
+      - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch.rpm"
+      - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm"
     disable_gpg_check: true
     state: present
+  notify: Update DNF Cache
 
-- name: Install Jellyfin flatpak
-  community.general.flatpak:
-    name: com.github.iwalton3.jellyfin-media-player
+- name: Install intel-media-driver
+  ansible.builtin.dnf:
+    name: intel-media-driver
     state: present
+
+- name: Install flatpak
+  community.general.flatpak:
+    name: 
+      - com.axosoft.GitKraken
+      - com.github.iwalton3.jellyfin-media-player
+    state: present
+
+

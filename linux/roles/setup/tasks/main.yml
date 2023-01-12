@@ -1,3 +1,6 @@
 ---
 - name: Application Install
   ansible.builtin.include_tasks: apps.yml
+
+- name: Hardware Setup
+  ansible.builtin.include_tasks: hardware.yml

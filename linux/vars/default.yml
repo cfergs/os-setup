@@ -2,8 +2,10 @@
 firefox_profiles:
   default-release: # default fedora profile
     extensions:
-      - ublock-origin
+      - bitwarden-password-manager
+      - facebook-container
       - multi-account-containers
       - sponsorblock
+      - ublock-origin
     preferences:
       browser.backspace_action: 0

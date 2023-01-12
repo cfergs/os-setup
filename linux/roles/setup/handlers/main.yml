@@ -1,4 +1,4 @@
 ---
-- name: Restart DNF Cache
+- name: Update DNF Cache
   ansible.builtin.dnf:
     update_cache: true
