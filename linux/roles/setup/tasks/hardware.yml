@@ -22,7 +22,7 @@
 
 - name: Install dependencies
   ansible.builtin.dnf:
-    name: 
+    name:
       - dkms
       - "kernel-devel-{{ ansible_kernel }}"
       - openssl

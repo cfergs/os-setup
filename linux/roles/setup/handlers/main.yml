@@ -2,3 +2,6 @@
 - name: Update DNF Cache
   ansible.builtin.dnf:
     update_cache: true
+
+- name: Rebuild intramfs
+  ansible.builtin.command: dracut --force

@@ -2,5 +2,8 @@
 - name: Application Install
   ansible.builtin.include_tasks: apps.yml
 
+- name: Graphics Setup
+  ansible.builtin.include_tasks: intel-drivers.yml
+
 - name: Hardware Setup
   ansible.builtin.include_tasks: hardware.yml
