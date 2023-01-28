@@ -1,0 +1,30 @@
+---
+# Get current active connection profile
+- name: Check dns of default network interface
+  ansible.builtin.shell: |
+    set -o pipefail
+    nmcli device show {{ ansible_facts['default_ipv4']['interface'] }} | grep 8.8.8.8
+  register: interface_dns
+  failed_when: false
+  check_mode: false
+  changed_when: false
+
+- name: Update Interface DNS
+  when: interface_dns.rc == 0
+  block:
+    - name: Get interface # noqa no-changed-when
+      ansible.builtin.command: "nmcli -g GENERAL.CONNECTION device show {{ ansible_facts['default_ipv4']['interface'] }}"
+      register: interface_connection
+
+    - name: Add two IPv4 DNS server addresses
+      community.general.nmcli:
+        conn_name: "{{ interface_connection.stdout }}"
+        dns4_ignore_auto: true
+        dns4:
+          - 192.168.5.1
+        state: present
+
+    - name: Restart service
+      ansible.builtin.systemd:
+        name: NetworkManager
+        state: restarted

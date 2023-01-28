@@ -1,0 +1,16 @@
+---
+- name: Install dnf apps
+  ansible.builtin.dnf:
+    name:
+      - nodejs
+    state: present
+
+- name: Install meshcommander node.js package.
+  community.general.npm:
+    name: meshcommander
+    path: /npmjs
+
+# To use.
+# cd /npmjs/node_modules/meshcommander
+# node meshcommander
+# then go to specified url

@@ -1,4 +1,10 @@
 ---
+- name: DNS Settings
+  ansible.builtin.include_tasks: dns.yml
+
+- name: Install Meshcommander
+  ansible.builtin.include_tasks: meshcommander.yml
+
 - name: Application Install
   ansible.builtin.include_tasks: apps.yml
 

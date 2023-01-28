@@ -35,7 +35,21 @@
       - code
       - google-chrome-stable
       - git # for git hooks
+      - snapd
     state: present
+
+- name: Enable Classic Snap Support
+  ansible.builtin.file:
+    src: /var/lib/snapd/snap
+    dest: /snap
+    state: link
+
+# need to logoff/logon for snaps to appear
+- name: Install snap apps # TO-DO: this will fail as you first need to initialize system state, no idea how
+  community.general.snap:
+    name:
+      - storage-explorer
+      - snap-store
 
 - name: Install flatpak
   community.general.flatpak:
