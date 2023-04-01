@@ -5,6 +5,9 @@
 - name: Install Meshcommander
   ansible.builtin.include_tasks: meshcommander.yml
 
+- name: App Repo Setup
+  ansible.builtin.include_tasks: apps-repos.yml
+
 - name: Application Install
   ansible.builtin.include_tasks: apps.yml
 
