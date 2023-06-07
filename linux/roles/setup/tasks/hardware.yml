@@ -30,14 +30,14 @@
 
 - name: Download displaylink installer
   ansible.builtin.get_url:
-    url: https://github.com/displaylink-rpm/displaylink-rpm/releases/download/v5.6.1-1/fedora-37-displaylink-1.12.0-2.x86_64.rpm
+    url: https://github.com/displaylink-rpm/displaylink-rpm/releases/download/v5.7.0/fedora-37-displaylink-1.13.1-1.x86_64.rpm
     dest: /tmp
     mode: 0770
 
 - name: Install displaylink
   ansible.builtin.dnf:
     name:
-      - /tmp/fedora-37-displaylink-1.12.0-2.x86_64.rpm
+      - /tmp/fedora-37-displaylink-1.13.1-1.x86_64.rpm
     disable_gpg_check: true
     state: present
 
