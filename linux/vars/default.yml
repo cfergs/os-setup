@@ -1,4 +1,14 @@
 ---
+# defaults for pyenv
+pyenv_init_shell: true
+pyenv_version: "v2.3.18"
+pyenv_virtualenv_version: "v1.2.1"
+pyenv_python_versions:
+  - 3.9.16
+  - 3.11.3
+pyenv_global: 3.11.3 system
+
+# Firefox defaults
 firefox_profiles:
   default-release: # default fedora profile
     extensions:

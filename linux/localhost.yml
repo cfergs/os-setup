@@ -12,3 +12,6 @@
     - role: staticdev.firefox
       vars:
         - ansible_become: false
+    - role: markosamuli.pyenv
+      vars:
+        - ansible_become: false

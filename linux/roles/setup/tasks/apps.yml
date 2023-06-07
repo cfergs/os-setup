@@ -7,10 +7,25 @@
     name:
       - code
       - google-chrome-stable
-      - git # for git hooks
       - pre-commit
       - snapd
       - winehq-stable
+    state: present
+
+- name: Install dnf apps for pyenv
+  ansible.builtin.dnf:
+    name:
+      - bzip2-devel
+      - git # + for githooks
+      - gcc
+      - libffi-devel
+      - openssl-devel
+      - python3-tkinter
+      - readline-devel
+      - sqlite-devel
+      - tk-devel
+      - xz-devel
+      - zlib-devel
     state: present
 
 - name: Enable Classic Snap Support
