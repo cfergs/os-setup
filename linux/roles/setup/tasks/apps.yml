@@ -9,6 +9,7 @@
       - google-chrome-stable
       - pre-commit
       - snapd
+      - terraform
       - winehq-stable
     state: present
 
@@ -26,6 +27,13 @@
       - tk-devel
       - xz-devel
       - zlib-devel
+    state: present
+
+- name: Install pre-requirements to use RancherDesktop AppImage
+  ansible.builtin.dnf:
+    name:
+      - pass
+      - gnupg2
     state: present
 
 - name: Enable Classic Snap Support

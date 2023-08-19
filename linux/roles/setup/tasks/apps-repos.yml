@@ -41,3 +41,13 @@
     gpgcheck: true
     gpgkey: https://dl.winehq.org/wine-builds/winehq.key
   notify: Update DNF Cache
+
+- name: Add Terraform Repo
+  ansible.builtin.yum_repository:
+    name: hashicorp
+    baseurl: "https://rpm.releases.hashicorp.com/fedora/{{ ansible_distribution_version }}/{{ ansible_architecture }}/stable"
+    description: hashicorp
+    enabled: true
+    gpgcheck: true
+    gpgkey: https://rpm.releases.hashicorp.com/gpg
+  notify: Update DNF Cache

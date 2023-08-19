@@ -32,7 +32,7 @@
   ansible.builtin.get_url:
     url: https://github.com/displaylink-rpm/displaylink-rpm/releases/download/v5.7.0/fedora-37-displaylink-1.13.1-1.x86_64.rpm
     dest: /tmp
-    mode: 0770
+    mode: "0770"
 
 - name: Install displaylink
   ansible.builtin.dnf:
