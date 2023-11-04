@@ -21,7 +21,7 @@ VENV_DIRECTORY := .venv
 DEV_REQUIREMENTS_STAMP := $(VENV_DIRECTORY)/dev-requirements-stamp
 FROZEN_DEV_REQUIREMENTS_STAMP := $(VENV_DIRECTORY)/frozen-dev-requirements-stamp
 
-${VENV_DIRECTORY}: pre-install-steps
+${VENV_DIRECTORY}:
 	python3 -m venv ${VENV_DIRECTORY}
 	. .venv/bin/activate; pip install -r requirements-pip.txt
 
@@ -51,5 +51,5 @@ clean: clean-pre-commit clean-venv
 
 
 # Ansible Specific
-ansible-linux: ci-environment
+ansible-linux: ci-environment pre-install-steps
 	cd linux; make ansible

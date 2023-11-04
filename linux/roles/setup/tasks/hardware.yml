@@ -2,58 +2,18 @@
 # Lenovo Touchpad workaround https://bugzilla.redhat.com/show_bug.cgi?id=1868899
 # Must reboot to take effect
 
-- name: Detect if workaround active
-  ansible.builtin.shell: |
-    set -o pipefail
-    grubby --info=/boot/vmlinuz-$(uname -r) | grep pci=nocrs
-  register: touchpad_status
-  failed_when: touchpad_status == 2
-  check_mode: false
-  changed_when: false
+# - name: TouchPad | Detect if workaround active
+#  ansible.builtin.shell: |
+#    set -o pipefail
+#    grubby --info=/boot/vmlinuz-$(uname -r) | grep pci=nocrs
+#  register: touchpad_status
+#  failed_when: touchpad_status == 2
+#  check_mode: false
+#  changed_when: false
 
-- name: Enable Touchpad Workaround
-  become: true
-  ansible.builtin.shell: |
-    set -o pipefail
-    grubby --update-kernel=ALL --args=pci=nocrs
-  when: touchpad_status.rc == 1
-
-# DisplayLink
-
-- name: Install dependencies
-  ansible.builtin.dnf:
-    name:
-      - dkms
-      - "kernel-devel-{{ ansible_kernel }}"
-      - openssl
-    state: present
-
-- name: Download displaylink installer
-  ansible.builtin.get_url:
-    url: https://github.com/displaylink-rpm/displaylink-rpm/releases/download/v5.7.0/fedora-37-displaylink-1.13.1-1.x86_64.rpm
-    dest: /tmp
-    mode: "0770"
-
-- name: Install displaylink
-  ansible.builtin.dnf:
-    name:
-      - /tmp/fedora-37-displaylink-1.13.1-1.x86_64.rpm
-    disable_gpg_check: true
-    state: present
-
-# from https://github.com/displaylink-rpm/displaylink-rpm
-# To use displaylink-rpm and the evdi kernel module with secure boot enabled on Fedora you need to sign the module with an enrolled Machine Owner Key (MOK).
-# 1. create a self signed MOK:
-# openssl req -new -x509 -newkey rsa:2048 -keyout MOK.priv -outform DER -out MOK.der -nodes -days 36500 -subj "/CN=Displaylink/"
-
-# 2. register the MOK with secure boot:
-# sudo mokutil --import MOK.der
-
-# 3. Reboot your Fedora host and follow the instructions to enroll the key.
-
-# 4. Now you can sign the evdi module. This must be done for every kernel upgrade:
-
-# sudo modinfo -n evdi /lib/modules/$(uname -r)/extra/evdi.ko.xz
-# sudo unxz $(modinfo -n evdi)
-# sudo /usr/src/kernels/$(uname -r)/scripts/sign-file sha256 ./MOK.priv ./MOK.der /lib/modules/$(uname -r)/extra/evdi.ko
-# sudo xz -f /lib/modules/$(uname -r)/extra/evdi.ko
+# - name: Enable Touchpad Workaround # noqa no-changed-when
+#  become: true
+#  ansible.builtin.shell: |
+#    set -o pipefail
+#    grubby --update-kernel=ALL --args=pci=nocrs
+#  when: touchpad_status.rc == 1

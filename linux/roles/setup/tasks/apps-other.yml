@@ -1,11 +1,11 @@
 ---
-- name: Install dnf apps
+- name: MeshCommander | Pre-Reqs
   ansible.builtin.dnf:
     name:
       - nodejs
     state: present
 
-- name: Install meshcommander node.js package.
+- name: MeshCommander | Install
   community.general.npm:
     name: meshcommander
     path: /npmjs

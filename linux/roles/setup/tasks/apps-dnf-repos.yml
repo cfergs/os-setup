@@ -1,8 +1,8 @@
-- name: Import VSCode rpm key
+- name: DNF | Import VSCode rpm key
   ansible.builtin.rpm_key:
     key: https://packages.microsoft.com/keys/microsoft.asc
 
-- name: Add VSCode Repo
+- name: DNF | Add VSCode Repo
   ansible.builtin.yum_repository:
     name: code
     baseurl: https://packages.microsoft.com/yumrepos/vscode
@@ -13,11 +13,11 @@
     gpgkey: https://packages.microsoft.com/keys/microsoft.asc
   notify: Update DNF Cache
 
-- name: Import Google RPM key
+- name: DNF | Import Google rpm key
   ansible.builtin.rpm_key:
     key: https://dl.google.com/linux/linux_signing_key.pub
 
-- name: Add Google Repo
+- name: DNF | Add Google Repo
   ansible.builtin.yum_repository:
     name: google-chrome
     baseurl: http://dl.google.com/linux/chrome/rpm/stable/x86_64
@@ -28,11 +28,11 @@
     gpgkey: https://dl.google.com/linux/linux_signing_key.pub
   notify: Update DNF Cache
 
-- name: Import VSCode rpm key
+- name: DNF | Import VSCode rpm key
   ansible.builtin.rpm_key:
     key: https://dl.winehq.org/wine-builds/winehq.key
 
-- name: Add Wine Repo
+- name: DNF | Add Wine Repo
   ansible.builtin.yum_repository:
     name: winehq
     baseurl: "https://dl.winehq.org/wine-builds/fedora/{{ ansible_distribution_major_version }}"
@@ -42,7 +42,7 @@
     gpgkey: https://dl.winehq.org/wine-builds/winehq.key
   notify: Update DNF Cache
 
-- name: Add Terraform Repo
+- name: DNF | Add Terraform Repo
   ansible.builtin.yum_repository:
     name: hashicorp
     baseurl: "https://rpm.releases.hashicorp.com/fedora/{{ ansible_distribution_version }}/{{ ansible_architecture }}/stable"

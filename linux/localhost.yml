@@ -8,10 +8,8 @@
   roles:
     - role: setup
       vars:
-        - ansible_become: true
-    - role: staticdev.firefox
+        # needed due to dropping in and out of become mode
+        ansible_become: true # noqa var-naming[no-role-prefix]
+    - role: firefox
       vars:
-        - ansible_become: false
-    - role: markosamuli.pyenv
-      vars:
-        - ansible_become: false
+        ansible_become: false # noqa var-naming[no-role-prefix]

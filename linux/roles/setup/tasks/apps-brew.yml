@@ -1,4 +1,7 @@
-# Install Homebrew
+# TO-DO - Automate brew installation using ansible
 
-# https://github.com/MonolithProjects/ansible-homebrew
-# https://docs.ansible.com/ansible/latest/collections/community/general/homebrew_module.html
+- name: Brew | Install apps
+  community.general.homebrew:
+    name: pyenv
+    state: latest
+    update_homebrew: true

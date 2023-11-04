@@ -1,18 +1,23 @@
 ---
-- name: DNS Settings
-  ansible.builtin.include_tasks: dns.yml
+- name: Apps | DNF | Repo Setup
+  ansible.builtin.include_tasks: apps-dnf-repos.yml
 
-- name: Install Meshcommander
-  ansible.builtin.include_tasks: meshcommander.yml
+- name: Apps | DNF | Installs
+  ansible.builtin.include_tasks: apps-dnf.yml
 
-- name: App Repo Setup
-  ansible.builtin.include_tasks: apps-repos.yml
+- name: Apps | Brew | Installs
+  ansible.builtin.include_tasks: apps-brew.yml
+  vars:
+    ansible_become: false # brew won't run as sudo
 
-- name: Application Install
-  ansible.builtin.include_tasks: apps.yml
+- name: Apps | Flatpak | Installs
+  ansible.builtin.include_tasks: apps-flatpak.yml
 
-- name: Graphics Setup
-  ansible.builtin.include_tasks: intel-drivers.yml
+- name: Apps | Custom | Installs
+  ansible.builtin.include_tasks: apps-other.yml
 
-- name: Hardware Setup
-  ansible.builtin.include_tasks: hardware.yml
+- name: Hardware | Intel
+  ansible.builtin.include_tasks: hardware-intel.yml
+
+- name: Hardware | DisplayLink
+  ansible.builtin.include_tasks: hardware-displaylink.yml

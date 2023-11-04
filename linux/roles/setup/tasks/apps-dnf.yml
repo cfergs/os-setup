@@ -1,0 +1,37 @@
+---
+- name: DNF | Force Repo handlers to run
+  ansible.builtin.meta: flush_handlers
+
+- name: DNF | Install Applications
+  ansible.builtin.dnf:
+    name:
+      - code
+      - google-chrome-stable
+      - pre-commit
+      - terraform
+      - winehq-stable
+      - wireguard-tools
+    state: present
+
+- name: DNF | RancherDesktop AppImage Pre-Requirements
+  ansible.builtin.dnf:
+    name:
+      - pass
+      - gnupg2
+    state: present
+
+- name: DNF | Remove KDE default installed apps
+  ansible.builtin.dnf:
+    name:
+      - akregator
+      - kf5-mailimporter
+      - kaddressbook
+      - kde-connect
+      - kmail
+      - kmail-account-wizard
+      - kontact
+      - konversation
+      - korganizer
+      - kwalletmanager
+    autoremove: true
+    state: absent

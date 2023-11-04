@@ -3,5 +3,5 @@
   ansible.builtin.dnf:
     update_cache: true
 
-- name: Rebuild intramfs
+- name: Rebuild intramfs # noqa no-changed-when
   ansible.builtin.command: dracut --force

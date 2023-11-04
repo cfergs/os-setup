@@ -13,7 +13,10 @@ FedoraPreReqs() {
   echo "*** FINISH: pre-requirements check ***"
 }
 
-if [[ $(cat /etc/fedora-release | echo $ID) -eq 'fedora' ]]; then
+if [ -f "/etc/fedora-release" ]; then
   echo "Running Fedora"
   FedoraPreReqs
+else
+  echo "Not running Fedora. Exiting."
+  exit 1
 fi
