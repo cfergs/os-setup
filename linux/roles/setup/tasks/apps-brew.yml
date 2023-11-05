@@ -1,0 +1,7 @@
+# TO-DO - Automate brew installation using ansible
+
+- name: Brew | Install apps
+  community.general.homebrew:
+    name: pyenv
+    state: latest
+    update_homebrew: true

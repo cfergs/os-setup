@@ -1,0 +1,15 @@
+---
+- name: Setup Workstation
+  hosts: localhost
+  gather_facts: true
+  become: true
+  vars_files:
+    - ./vars/default.yml
+  roles:
+    - role: setup
+      vars:
+        # needed due to dropping in and out of become mode
+        ansible_become: true # noqa var-naming[no-role-prefix]
+    - role: firefox
+      vars:
+        ansible_become: false # noqa var-naming[no-role-prefix]

@@ -1,0 +1,49 @@
+---
+# as per https://ask.fedoraproject.org/t/intel-graphics-best-practices-and-settings-for-hardware-acceleration/21119
+# remember to reboot after these steps for them to take effect!
+
+- name: Intel | Install rpmfusion repos
+  ansible.builtin.dnf:
+    name:
+      - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch.rpm"
+      - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm"
+    disable_gpg_check: true
+    state: present
+  notify: Update DNF Cache
+
+- name: Intel | Install intel-media-driver
+  ansible.builtin.dnf:
+    name:
+      - intel-media-driver
+      - libva-utils
+      - vdpauinfo
+      - intel-gpu-tools
+      - mesa-dri-drivers
+      - mpv
+      - gstreamer1-vaapi
+      - ffmpeg
+    state: present
+    allowerasing: true
+
+- name: Intel | Ensure LIBVA is sourced from the .bashrc
+  ansible.builtin.blockinfile:
+    dest: "{{ ansible_env.HOME }}/.bashrc"
+    block: |
+      export LIBVA_DRIVER_NAME=iHD
+    marker: '# {mark} ANSIBLE MANAGED BLOCK - LIBVA'
+    insertbefore: BOF
+    create: true
+    mode: "0644"
+  become: false
+
+- name: Intel | Create i915.conf
+  ansible.builtin.blockinfile:
+    dest: /etc/modprobe.d/i915.conf
+    block: |
+      options i915 enable_guc=3
+      options i915 enable_fbc=1
+    marker: '# {mark} ANSIBLE MANAGED BLOCK'
+    insertbefore: BOF
+    mode: "0644"
+    create: true
+  notify: Rebuild intramfs

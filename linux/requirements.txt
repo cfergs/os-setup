@@ -1,0 +1,2 @@
+ansible-core==2.15.5
+requests==2.31.0 # for configuring firefox settings

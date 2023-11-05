@@ -1,0 +1,23 @@
+---
+- name: Apps | DNF | Repo Setup
+  ansible.builtin.include_tasks: apps-dnf-repos.yml
+
+- name: Apps | DNF | Installs
+  ansible.builtin.include_tasks: apps-dnf.yml
+
+- name: Apps | Brew | Installs
+  ansible.builtin.include_tasks: apps-brew.yml
+  vars:
+    ansible_become: false # brew won't run as sudo
+
+- name: Apps | Flatpak | Installs
+  ansible.builtin.include_tasks: apps-flatpak.yml
+
+- name: Apps | Custom | Installs
+  ansible.builtin.include_tasks: apps-other.yml
+
+- name: Hardware | Intel
+  ansible.builtin.include_tasks: hardware-intel.yml
+
+- name: Hardware | DisplayLink
+  ansible.builtin.include_tasks: hardware-displaylink.yml

@@ -1,0 +1,16 @@
+---
+- name: MeshCommander | Pre-Reqs
+  ansible.builtin.dnf:
+    name:
+      - nodejs
+    state: present
+
+- name: MeshCommander | Install
+  community.general.npm:
+    name: meshcommander
+    path: /npmjs
+
+# To use.
+# cd /npmjs/node_modules/meshcommander
+# node meshcommander
+# then go to specified url

@@ -1,0 +1,19 @@
+---
+# Lenovo Touchpad workaround https://bugzilla.redhat.com/show_bug.cgi?id=1868899
+# Must reboot to take effect
+
+# - name: TouchPad | Detect if workaround active
+#  ansible.builtin.shell: |
+#    set -o pipefail
+#    grubby --info=/boot/vmlinuz-$(uname -r) | grep pci=nocrs
+#  register: touchpad_status
+#  failed_when: touchpad_status == 2
+#  check_mode: false
+#  changed_when: false
+
+# - name: Enable Touchpad Workaround # noqa no-changed-when
+#  become: true
+#  ansible.builtin.shell: |
+#    set -o pipefail
+#    grubby --update-kernel=ALL --args=pci=nocrs
+#  when: touchpad_status.rc == 1
