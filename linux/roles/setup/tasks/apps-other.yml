@@ -14,3 +14,20 @@
 # cd /npmjs/node_modules/meshcommander
 # node meshcommander
 # then go to specified url
+
+#######
+- name: Winbox | Download
+  ansible.builtin.get_url:
+    url: https://download.mikrotik.com/winbox/3.40/winbox64.exe
+    dest: /home/colin/Downloads
+    mode: "0644"
+
+- name: CF-Terraforming | Download
+  ansible.builtin.unarchive:
+    src: https://github.com/cloudflare/cf-terraforming/releases/download/v0.16.1/cf-terraforming_0.16.1_linux_amd64.tar.gz
+    dest: /usr/local/bin
+    include: cf-terraforming
+    owner: root
+    group: root
+    mode: "0755"
+    remote_src: true
