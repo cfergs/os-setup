@@ -5,11 +5,6 @@
 - name: Apps | DNF | Installs
   ansible.builtin.include_tasks: apps-dnf.yml
 
-- name: Apps | Brew | Installs
-  ansible.builtin.include_tasks: apps-brew.yml
-  vars:
-    ansible_become: false # brew won't run as sudo
-
 - name: Apps | Flatpak | Installs
   ansible.builtin.include_tasks: apps-flatpak.yml
 

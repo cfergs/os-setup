@@ -1,4 +1,12 @@
 ---
+# Pyenv defaults
+pyenv_owner: colin
+pyenv_path: /home/colin/pyenv
+pyenv_python_versions:
+  - 3.9.18
+  - 3.11.6
+pyenv_shellrc_file: /home/colin/.bashrc
+
 # Firefox defaults
 firefox_profiles:
   default-release: # default fedora profile
