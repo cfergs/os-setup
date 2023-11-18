@@ -27,14 +27,12 @@
 
 - name: Intel | Ensure LIBVA is sourced from the .bashrc
   ansible.builtin.blockinfile:
-    dest: "{{ ansible_env.HOME }}/.bashrc"
+    dest: /etc/bashrc # set for ALL users
     block: |
       export LIBVA_DRIVER_NAME=iHD
     marker: '# {mark} ANSIBLE MANAGED BLOCK - LIBVA'
     insertbefore: BOF
-    create: true
     mode: "0644"
-  become: false
 
 - name: Intel | Create i915.conf
   ansible.builtin.blockinfile:

@@ -32,6 +32,5 @@
       - kontact
       - konversation
       - korganizer
-      - kwalletmanager
     autoremove: true
     state: absent

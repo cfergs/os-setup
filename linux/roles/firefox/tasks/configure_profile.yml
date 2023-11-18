@@ -1,7 +1,13 @@
 ---
 # Must kill running firefox processes for profile to be correctly created
+- name: Firefox | Check if running # noqa command-instead-of-shell no-changed-when
+  ansible.builtin.shell: pgrep firefox
+  register: firefox_running
+  ignore_errors: true # don't fail if firefox isn't running
+
 - name: Firefox | Kill running processes # noqa command-instead-of-shell no-changed-when
-  ansible.builtin.shell: pkill -f firefox
+  ansible.builtin.shell: pkill firefox
+  when: firefox_running.rc == 0
 
 - name: Create profiles
   firefox_profile:
