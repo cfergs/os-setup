@@ -16,3 +16,7 @@
 
 - name: Hardware | DisplayLink
   ansible.builtin.include_tasks: hardware-displaylink.yml
+
+# TODO - store password in kdewallet. For now have locked down perms to keys and wg config
+- name: Wireguard
+  ansible.builtin.include_tasks: wireguard.yml

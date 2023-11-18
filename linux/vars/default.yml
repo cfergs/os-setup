@@ -1,4 +1,14 @@
 ---
+wireguard:
+  host_address: 172.16.32.4/24
+  dns: 172.16.32.1
+  mikrotik_public_key: 5LMZUHNdk0eG+gVP348NZJ9qSYWoVfcb6GpW3IbuBVU=
+  mikrotik_endpoint: vpn.chickenwaffles.net:51820
+  allowed_ranges:
+    - 172.16.32.1/32
+    - 192.168.0.0/24
+    - 192.168.9.0/24
+
 # Pyenv defaults
 pyenv_owner: colin
 pyenv_path: /home/colin/pyenv

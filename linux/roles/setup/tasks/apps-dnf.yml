@@ -10,7 +10,6 @@
       - pre-commit
       - terraform
       - winehq-stable
-      - wireguard-tools
     state: present
 
 - name: DNF | RancherDesktop AppImage Pre-Requirements

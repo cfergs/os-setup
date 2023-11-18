@@ -1,0 +1,49 @@
+# Wireguard won't work UNTIL you extract public key and pop into Mikrotik
+# Each reinstall will generate a different private/public key
+
+- name: WireGuard | Install Tools
+  ansible.builtin.dnf:
+    name:
+      - wireguard-tools
+    state: present
+
+- name: Generate Keys # noqa command-instead-of-shell
+  ansible.builtin.shell: "{{ item.cmd }}"
+  args:
+    creates: "{{ item.creates }}"
+    chdir: /etc/wireguard
+  loop:
+    - cmd: wg genkey > privatekey
+      creates: privatekey
+    - cmd: wg pubkey < privatekey > publickey
+      creates: publickey
+
+# Alternative would be lookup plugin but that doesnt appear to honour become:true
+# https://github.com/ansible/ansible/issues/8297#issuecomment-380242142
+- name: WireGuard | Extract private key
+  ansible.builtin.shell: |
+    set -o pipefail
+    cat /etc/wireguard/privatekey
+  register: privatekey
+  no_log: true
+  check_mode: false
+  changed_when: false
+
+# nmcli doesnt allow configuring peers - via cli or ansible
+# best method is to template a nmcli file then load it
+# https://blogs.gnome.org/thaller/2019/03/15/wireguard-in-networkmanager/
+- name: WireGuard | Connection Create
+  ansible.builtin.template:
+    src: wg0.nmconnection.j2
+    dest: /etc/NetworkManager/system-connections/wg0.nmconnection
+    owner: root
+    group: root
+    mode: "0600"
+  register: wireguard_config
+  no_log: true
+
+- name: WireGuard | NetworkManager Load # noqa no-changed-when no-handler
+  ansible.builtin.shell: |
+    set -o pipefail
+    nmcli connection load /etc/NetworkManager/system-connections/wg0.nmconnection
+  when: wireguard_config.changed

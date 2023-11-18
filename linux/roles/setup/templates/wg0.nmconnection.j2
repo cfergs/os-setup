@@ -1,0 +1,24 @@
+[connection]
+id=wg0
+uuid=6bfde7a1-5218-4f3a-b279-1c0ccb566f3a
+type=wireguard
+autoconnect=false
+interface-name=wg0
+
+[wireguard]
+private-key={{ privatekey.stdout }}
+
+[wireguard-peer.{{ wireguard.mikrotik_public_key }}]
+endpoint={{ wireguard.mikrotik_endpoint }}
+allowed-ips={{ wireguard.allowed_ranges | join(';') }};
+
+[ipv4]
+address1={{ wireguard.host_address }}
+dns={{ wireguard.dns }};
+dns-priority=-1
+dns-search=~.;
+method=manual
+
+[ipv6]
+addr-gen-mode=default
+method=disabled
