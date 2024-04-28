@@ -5,6 +5,7 @@
 - name: DNF | Install Applications
   ansible.builtin.dnf:
     name:
+      - 1password
       - code
       - google-chrome-stable
       - pre-commit
@@ -17,6 +18,14 @@
     name:
       - pass
       - gnupg2
+    state: present
+
+- name: DNF | Pyenv Pre-Requirements
+  ansible.builtin.dnf:
+    name:
+      - libsqlite3x-devel
+      - libuuid-devel
+      - tk-devel
     state: present
 
 - name: DNF | Remove KDE default installed apps

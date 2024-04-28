@@ -51,3 +51,17 @@
     gpgcheck: true
     gpgkey: https://rpm.releases.hashicorp.com/gpg
   notify: Update DNF Cache
+
+- name: DNF | Import 1Password rpm key
+  ansible.builtin.rpm_key:
+    key: https://downloads.1password.com/linux/keys/1password.asc
+
+- name: DNF | Add 1Password Repo
+  ansible.builtin.yum_repository:
+    name: 1password
+    baseurl: https://downloads.1password.com/linux/rpm/stable/$basearch
+    description: 1Password Stable Channel
+    enabled: true
+    gpgcheck: true
+    gpgkey: https://downloads.1password.com/linux/keys/1password.asc
+  notify: Update DNF Cache
