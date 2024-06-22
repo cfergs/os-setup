@@ -8,14 +8,14 @@
 
 - name: DisplayLink | Download installer
   ansible.builtin.get_url:
-    url: https://github.com/displaylink-rpm/displaylink-rpm/releases/download/v5.8.0/fedora-38-displaylink-1.14.1-1.x86_64.rpm
-    dest: /tmp/fedora-displaylink-x86_x64.rpm
+    url: https://github.com/displaylink-rpm/displaylink-rpm/releases/download/v6.0.0/fedora-40-displaylink-1.14.4-2.github_evdi.x86_64.rpm
+    dest: /tmp/fedora-40-displaylink-1.14.4-2.github_evdi.x86_64.rpm
     mode: "0770"
 
 - name: DisplayLink | Install
   ansible.builtin.dnf:
     name:
-      - /tmp/fedora-displaylink-x86_x64.rpm
+      - /tmp/fedora-40-displaylink-1.14.4-2.github_evdi.x86_64.rpm
     disable_gpg_check: true
     state: present
 

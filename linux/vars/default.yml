@@ -21,7 +21,7 @@ pyenv_shellrc_file: /home/colin/.bashrc
 firefox_profiles:
   default-release: # default fedora profile
     extensions:
-      - bitwarden-password-manager
+      - 1password-x-password-manager
       - facebook-container
       - multi-account-containers
       - sponsorblock
