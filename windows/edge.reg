@@ -23,6 +23,7 @@ Windows Registry Editor Version 5.00
 "ShowRecommendationsEnabled"=dword:00000000
 [HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Edge\ExtensionAllowedTypes]
 "1"="theme"
+"2"="extension"
 
 ;# possible ONLY if not Win10 home and domain joined/intune managed or fake mdm settings
 ;# https://hitco.at/blog/apply-edge-policies-for-non-domain-joined-devices/
